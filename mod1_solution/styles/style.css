@@ -1,0 +1,20 @@
+.message {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: green;
+}
+input.noData {
+  border-color: red;
+}
+
+input.noData {
+  border-color: red;
+}
+
+input.enjoy, input.tooMuch{
+  border-color: green;
+}
+
+div.noData {
+  color: red;
+}
