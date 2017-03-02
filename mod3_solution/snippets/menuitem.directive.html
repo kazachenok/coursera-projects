@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <div id="content-boxes" class="row">
+    <div ng-repeat="item in list.items">
+      <div class="clearfix" ng-if="$index % 3 == 0"></div>
+      <div class="col-sm-4">
+        <div class="content-box">
+          <h5 id="content-box-header" class="text-center"> {{ ::item.name }}</h5>
+          <div class="content-description">{{ ::item.short_name }}: {{ ::item.description }}</div>
+          <div class="text-right content-box-manage">
+            <button type="button" class="btn btn-secondary" ng-click="list.onRemove({index: $index});">Don't want this one!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
