@@ -4,7 +4,8 @@
   angular.module("ShoppingListCheckOff", [])
   .controller('ToBuyController', ToBuyController)
   .controller('AlreadyBoughtController', AlreadyBoughtController)
-  .service('ShoppingListCheckOffService', ShoppingListCheckOffService)
+  .provider('ShoppingListCheckOffService', ShoppingListCheckOffServiceProvider)
+  .config(ShoppingListConfig);
 
   ToBuyController.$inject = ['ShoppingListCheckOffService'];
   function ToBuyController(ShoppingListCheckOffService) {
@@ -32,17 +33,10 @@
     }
   }
 
-  function ShoppingListCheckOffService() {
+  function ShoppingListCheckOffService(shoppingList) {
     var service = this;
 
-    var toBuyList = [
-      { name: "Milk", quantity: 1 },
-      { name: "Donuts", quantity: 4 },
-      { name: "Cookies", quantity: 2 },
-      { name: "Chocolate", quantity: 5 },
-      { name: "Peanut Butter", quantity: 2 }
-    ];
-
+    var toBuyList = shoppingList;
     var alreadyBoughtList = [];
 
     service.getToBuyList = function() {
@@ -57,5 +51,30 @@
       var item = toBuyList[index];
       alreadyBoughtList.push(item);
       toBuyList.splice(index,1);    }
+  }
+
+  function ShoppingListCheckOffServiceProvider() {
+    var provider = this;
+
+    provider.defaults = {
+      shoppingList: []
+    };
+
+    provider.$get = function () {
+      var shoppingListCheckOff = new ShoppingListCheckOffService(provider.defaults.shoppingList);
+      return shoppingListCheckOff;
+    };
+  }
+
+  ShoppingListConfig.$inject = ['ShoppingListCheckOffServiceProvider'];
+  function ShoppingListConfig(ShoppingListCheckOffServiceProvider) {
+    ShoppingListCheckOffServiceProvider.defaults.shoppingList =
+      [
+       { name: "Milk", quantity: 1 },
+       { name: "Donuts", quantity: 4 },
+       { name: "Cookies", quantity: 2 },
+       { name: "Chocolate", quantity: 5 },
+       { name: "Peanut Butter", quantity: 2 }
+     ];
   }
 })();
