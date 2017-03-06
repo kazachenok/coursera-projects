@@ -56,8 +56,6 @@
     service.boughtItem = function (index) {
       var item = toBuyList[index];
       alreadyBoughtList.push(item);
-      toBuyList.splice(index,1);
-      service.isBoughtListEmpty = false;
-    }
+      toBuyList.splice(index,1);    }
   }
 })();
