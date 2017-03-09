@@ -1,0 +1,11 @@
+<div class="page-header">
+  <h2> {{ categoryItems.name }}</h2>
+  <p>{{ categoryItems.instructions }}</p>
+</div>
+<div class="clearfix"></div>
+<ul>
+  <li ng-repeat="item in categoryItems.items">
+    <h4>{{ item.name }}</h4>
+    <p>{{ item.description }}</p>
+  </li>
+</ul>

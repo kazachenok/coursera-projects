@@ -1,0 +1,5 @@
+<div class="clearfix"></div>
+<ul>
+  <li ng-repeat="item in categories.items" ui-sref="categoryItems({category: item.short_name})"><a href="#" >{{ item.name }}</a>
+  <p>{{ item.special_instructions }}</p></li>
+</ul>
