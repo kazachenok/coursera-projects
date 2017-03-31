@@ -11,20 +11,17 @@ angular.module('NarrowItDownApp',[])
   function NarrowItDownController(MenuSearchService) {
     var narrowItDown = this;
 
+    narrowItDown.inProcess = false;
     narrowItDown.searchData = "";
     narrowItDown.items = [];
 
     narrowItDown.requestItems = function () {
-      if (!narrowItDown.searchData || narrowItDown.searchData === "") {
-          MenuSearchService.resetFoundItems();
-          narrowItDown.items = MenuSearchService.foundItems;
-      }
-      else {
+        narrowItDown.inProcess = true;
         MenuSearchService.getMatchedMenuItems(narrowItDown.searchData)
           .finally(function() {
             narrowItDown.items = MenuSearchService.foundItems;
+            narrowItDown.inProcess = false;
           });
-      }
     }
 
     narrowItDown.removeItem = function (index) {
@@ -36,29 +33,28 @@ angular.module('NarrowItDownApp',[])
     };
   }
 
-  MenuSearchService.$inject = ['$http', 'ApiBaseUrl'];
-  function MenuSearchService($http, ApiBaseUrl) {
+  MenuSearchService.$inject = ['$q', '$http', 'ApiBaseUrl'];
+  function MenuSearchService($q, $http, ApiBaseUrl) {
     var service = this;
 
     service.foundItems = [];
 
-    service.resetFoundItems = function () {
-      service.foundItems = [];
-    }
-
     service.getMatchedMenuItems = function (searchTerm) {
-      service.resetFoundItems();
-
+      service.foundItems = [];
+      if (!searchTerm || searchTerm === "") {
+          return $q.resolve([]);
+      }
       return $http({
-        method: "GET",
-        url: (ApiBaseUrl + "/menu_items.json")
-      }).then(function (result) {
-        var menu = result.data.menu_items;
-        for (var item in menu) {
-          if (checkItemByCriteria(menu[item], searchTerm)) {
-            service.foundItems.push(menu[item]);
-          };
-        }
+          method: "GET",
+          url: (ApiBaseUrl + "/menu_items.json")
+        }).then(function (result) {
+          var menu = result.data.menu_items;
+          var filteredItems = []
+          for (var item in menu) {
+            if (checkItemByCriteria(menu[item], searchTerm)) {
+              service.foundItems.push(menu[item]);
+            };
+          }
       });
     }
 

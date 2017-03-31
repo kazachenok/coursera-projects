@@ -16,7 +16,11 @@
         <input ng-model="narrowItDown.searchData" type="text" placeholder="search term" class="form-control">
       </div>
       <div class="form-group narrow-button">
-        <button class="btn btn-primary" ng-click="narrowItDown.requestItems()">Narrow It Down For Me!</button>
+        <button class="btn btn-primary" ng-click="narrowItDown.requestItems()"  ng-disabled="narrowItDown.inProcess">Narrow It Down For Me!</button>
+        <img ng-if="narrowItDown.inProcess"
+          class="loading-icon"
+          src="images/ellipsis.gif"
+          alt="loading">
       </div>
     </div>
 
