@@ -1,8 +1,8 @@
 (function() {
 "use strict";
 
-angular.module('common', [])
-.constant('ApiPath', 'https://ychaikin-course5.herokuapp.com')
+angular.module('common', ['ngMessages'])
+.constant('ApiPath', 'https://tranquil-sands-37157.herokuapp.com')
 .config(config);
 
 config.$inject = ['$httpProvider'];

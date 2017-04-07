@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+    <div id="signup">
+      <form class="form-horizontal no-margin" name="signUpForm" novalidate>
+        <div class="form-group">
+            <label for="inputFirstName" class="control-label col-sm-3">First Name</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="First Name"
+                  required
+                  ng-model="signupCtrl.firstName"
+                  ng-disabled="signUpForm.$submitted">
+                  <div class="ng-message-validation" role="alert"
+                    ng-messages="signUpForm.inputFirstName.$error"
+                    ng-show="signUpForm.inputFirstName.$touched">
+                   <div ng-message="required">*You did not enter a field</div>
+                 </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputLastName" class="control-label col-sm-3">Last Name</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputLastName" name="inputLastName" placeholder="Last Name"
+                  required
+                  ng-model="signupCtrl.lastName"
+                  ng-disabled="signUpForm.$submitted">
+                  <div class="ng-message-validation" role="alert"
+                    ng-messages="signUpForm.inputLastName.$error"
+                    ng-show="signUpForm.inputLastName.$touched">
+                   <div ng-message="required">*Last name is required</div>
+                 </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPhoneNumber" class="control-label col-sm-3">Phone</label>
+            <div class="col-sm-8">
+                <input type="tel" class="form-control" id="inputPhoneNumber" name="inputPhoneNumber" placeholder="Phone"
+                  required
+                  ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/"
+                  ng-model="signupCtrl.phoneNumber"
+                  ng-disabled="signUpForm.$submitted">
+                  <div class="ng-message-validation" role="alert"
+                    ng-messages="signUpForm.inputPhoneNumber.$error"
+                    ng-show="signUpForm.inputPhoneNumber.$touched" >
+                   <div ng-message="required">*Phone number is required</div>
+                   <div ng-message="pattern">Must be a valid phone number</div>
+                 </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail" class="control-label col-sm-3">Email</label>
+            <div class="col-sm-8">
+              <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email"
+                required
+                ng-model="signupCtrl.emailAddress"
+                ng-disabled="signUpForm.$submitted">
+                <div class="ng-message-validation" role="alert"
+                  ng-messages="signUpForm.inputEmail.$error"
+                  ng-show="signUpForm.inputEmail.$touched">
+                 <div ng-message="required">*Email address is required</div>
+                 <div ng-message="email">Email address is invalid</div>
+               </div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="inputMenuItem" class="control-label col-xs-3">Menu number</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control" id="inputMenuItem" name="inputMenuItem" placeholder=""
+              ng-model="signupCtrl.menuItem"
+              required
+              menu-item-exists
+              ng-disabled="signUpForm.$submitted">
+              <div class="ng-message-validation" role="alert"
+                ng-messages="signUpForm.inputMenuItem.$error"
+                ng-show="signUpForm.inputMenuItem.$touched">
+                <div ng-message="required">*Fields is required</div>
+                <div ng-message="found">*No such menu number exists</div>
+             </div>
+            <!-- <select class="form-control"
+              ng-model="signupCtrl.category"
+              ng-options="category.name for category in signupCtrl.categories">
+            </select> -->
+          </div>
+        </div>
+        <div class="form-group last-form-group">
+          <div class="col-sm-12 text-center">
+              <button type="submit" class="btn btn-primary"
+                ng-disabled="signUpForm.$invalid || signUpForm.$submitted"
+                ng-click="signupCtrl.submit();">Submit</button>
+          </div>
+        </div>
+
+        <div class="alert alert-success" ng-show="signUpForm.$submitted">
+          <strong>Success!</strong> Your information has been saved.
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -12,9 +12,9 @@ angular.module('public')
 
 
 MenuItemController.$inject = ['ApiPath'];
-function MenuItemController(ApiPath) {
-  var $ctrl = this;
-  $ctrl.basePath = ApiPath;
-}
+  function MenuItemController(ApiPath) {
+    var $ctrl = this;
+    $ctrl.basePath = ApiPath;
+  }
 
 })();

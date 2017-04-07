@@ -113,6 +113,18 @@ h3.menu-item-title {
 }
 /* END SINGLE CATEGORY PAGE */
 
+.ng-touched.ng-invalid {
+  border: 2px red solid;
+}
+
+.ng-message-validation {
+  color: red;
+}
+
+.user-info {
+  margin-bottom: 50px;
+  text-align: center;
+}
 
 /********** Large devices only **********/
 @media (min-width: 1200px) {
@@ -161,7 +173,11 @@ h3.menu-item-title {
     text-align: center;
   }
   .menu-item-description {
-    text-align: center;;
+    text-align: center;
+  }
+  .user-info {
+    text-align: center;
+    margin-bottom: 10px;
   }
 }
 
